@@ -428,7 +428,8 @@
 
   .text-container h2,
   .courses-section h2,
-  .courses-section .container h3 {
+  .courses-section .container h3,
+  .contents-mural h2 {
     font-size: var(--fonte-24px);
   }
 

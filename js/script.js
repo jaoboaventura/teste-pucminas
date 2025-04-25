@@ -15,6 +15,46 @@ window.addEventListener('scroll', () => {
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
 
+// FECHAR MENU HAMBURGUER
+
+const offcanvasElement = document.getElementById('offcanvasNavbar');
+
+let startX = 0;
+let currentX = 0;
+let isSwiping = false;
+
+// Início do toque
+offcanvasElement.addEventListener('touchstart', function (e) {
+    if (e.touches.length === 1) {
+        startX = e.touches[0].clientX;
+        isSwiping = true;
+    }
+});
+
+// Movimento do toque
+offcanvasElement.addEventListener('touchmove', function (e) {
+    if (!isSwiping) return;
+    currentX = e.touches[0].clientX;
+});
+
+// Fim do toque
+offcanvasElement.addEventListener('touchend', function () {
+    if (!isSwiping) return;
+
+    const swipeDistance = currentX - startX;
+
+    if (swipeDistance > 50) {
+        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvasInstance) {
+            offcanvasInstance.hide(); // Fecha o menu
+        }
+    }
+
+    isSwiping = false;
+    startX = 0;
+    currentX = 0;
+});
+
 // INFORMATIVOS DINÂMICOS
 
 const cardData = [
